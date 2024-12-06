@@ -1,0 +1,19 @@
+STANDARD_NAME	KEGG_CELL_CYCLE
+SYSTEMATIC_NAME	M7963
+COLLECTION	C2:CP:KEGG_LEGACY
+MSIGDB_URL	https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/KEGG_CELL_CYCLE
+NAMESPACE	Human_NCBI_Gene_ID
+DESCRIPTION_BRIEF	Cell cycle
+DESCRIPTION_FULL	Mitotic cell cycle progression is accomplished through a reproducible sequence of events, DNA replication (S phase) and mitosis (M phase) separated temporally by gaps known as G1 and G2 phases. Cyclin-dependent kinases (CDKs) are key regulatory enzymes, each consisting of a catalytic CDK subunit and an activating cyclin subunit. CDKs regulate the cell's progression through the phases of the cell cycle by modulating the activity of key substrates. Downstream targets of CDKs include transcription factor E2F and its regulator Rb. Precise activation and inactivation of CDKs at specific points in the cell cycle are required for orderly cell division. Cyclin-CDK inhibitors (CKIs), such as p16Ink4a, p15Ink4b, p27Kip1, and p21Cip1, are involved in the negative regulation of CDK activities, thus providing a pathway through which the cell cycle is negatively regulated. Eukaryotic cells respond to DNA damage by activating signaling pathways that promote cell cycle arrest and DNA repair. In response to DNA damage, the checkpoint kinase ATM phosphorylates and activates Chk2, which in turn directly phosphorylates and activates p53 tumor suppressor protein. p53 and its transcriptional targets play an important role in both G1 and G2 checkpoints. ATR-Chk1-mediated protein degradation of Cdc25A protein phosphatase is also a mechanism conferring intra-S-phase checkpoint activation.
+PMID	
+GEOID	
+AUTHORS	
+CONTRIBUTOR	KEGG
+CONTRIBUTOR_ORG	Kyoto Encyclopedia of Genes and Genomes
+EXACT_SOURCE	hsa04110
+FILTERED_BY_SIMILARITY	
+EXTERNAL_NAMES_FOR_SIMILAR_TERMS	
+EXTERNAL_DETAILS_URL	http://www.genome.jp/pathway/hsa04110
+SOURCE_MEMBERS	1017,1019,1021,1022,1026,1027,10274,1028,1029,1030,1031,1032,10393,10459,10735,10744,10912,10926,10971,1111,11200,1387,1647,1869,1870,1871,1874,1875,2033,23594,23595,246184,25,25847,27127,2810,2932,29882,29945,3065,3066,4085,4087,4088,4089,4171,4172,4173,4174,4175,4176,4193,4609,4616,472,494551,4998,4999,5000,5001,5111,51343,51433,51434,51529,5347,545,5591,5885,5925,5933,5934,595,64682,6500,6502,650621,651610,699,701,7027,7029,7040,7042,7043,7157,7272,728622,731751,7465,7529,7531,7532,7533,7534,7709,8243,8317,8318,8379,8454,85417,8555,8556,8697,8881,890,8900,891,894,896,898,902,9088,9126,9133,9134,9184,9232,9700,983,990,991,993,994,995,996,9978
+GENE_SYMBOLS	CDK2,CDK4,CDK6,CDK7,CDKN1A,CDKN1B,STAG1,CDKN1C,CDKN2A,CDKN2B,CDKN2C,CDKN2D,ANAPC10,MAD2L2,STAG2,PTTG2,GADD45G,DBF4,YWHAQ,CHEK1,CHEK2,CREBBP,GADD45A,E2F1,E2F2,E2F3,E2F4,E2F5,EP300,ORC6,ORC3,CDC26,ABL1,ANAPC13,SMC1B,SFN,GSK3B,ANAPC2,ANAPC4,HDAC1,HDAC2,MAD2L1,SMAD2,SMAD3,SMAD4,MCM2,MCM3,MCM4,MCM5,MCM6,MCM7,MDM2,MYC,GADD45B,ATM,WEE2,ORC1,ORC2,ORC4,ORC5,PCNA,FZR1,ANAPC5,ANAPC7,ANAPC11,PLK1,ATR,PRKDC,RAD21,RB1,RBL1,RBL2,CCND1,ANAPC1,SKP1,SKP2,,,BUB1,BUB1B,TFDP1,TFDP2,TGFB1,TGFB2,TGFB3,TP53,TTK,SKP1P2,,WEE1,YWHAB,YWHAE,YWHAG,YWHAH,YWHAZ,ZBTB17,SMC1A,CDC7,CDC45,MAD1L1,CUL1,CCNB3,CDC14B,CDC14A,CDC23,CDC16,CCNA2,CCNA1,CCNB1,CCND2,CCND3,CCNE1,CCNH,PKMYT1,SMC3,CCNB2,CCNE2,BUB3,PTTG1,ESPL1,CDK1,CDC6,CDC20,CDC25A,CDC25B,CDC25C,CDC27,RBX1
+FOUNDER_NAMES	

@@ -1,0 +1,19 @@
+STANDARD_NAME	BIOCARTA_IGF1_PATHWAY
+SYSTEMATIC_NAME	M2623
+COLLECTION	C2:CP:BIOCARTA
+MSIGDB_URL	https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/BIOCARTA_IGF1_PATHWAY
+NAMESPACE	HUMAN_SEQ_ACCESSION
+DESCRIPTION_BRIEF	IGF-1 Signaling Pathway
+DESCRIPTION_FULL	Insulin like growth factor 1 (IGF-1) and its receptor (IGF-1R) provide a potent proliferative signaling system that stimulates growth in many different cell types and blocks apoptosis. In vivo IGF-1 acts as an intermediate of many growth hormone responses, and may stimulate the growth of some types of cancer. IGF-1 also provides a mitogenic signal to act as a growth factor for many tissue culture cells. One component of IGF-1 mitogenic signaling is association of the receptor tyrosine kinase with Shc, Grb2, and Sos-1 to activate ras and the Map kinase cascade (raf, Mek, Erk). An endpoint of the Map kinase pathway is modification of transcription factor activity, such as activation of ELK transcription factors. Serum response factor (SRF) and AP-1 contribute to mitogenic signaling by many factors. Phosphorylation of IRS-1 and PI3 kinase activation are also involved in IGF-1 signaling, similar to insulin signaling.
+PMID	
+GEOID	
+AUTHORS	
+CONTRIBUTOR	BioCarta
+CONTRIBUTOR_ORG	BioCarta
+EXACT_SOURCE	
+FILTERED_BY_SIMILARITY	
+EXTERNAL_NAMES_FOR_SIMILAR_TERMS	
+EXTERNAL_DETAILS_URL	https://data.broadinstitute.org/gsea-msigdb/msigdb/biocarta/human/h_igf1Pathway.gif
+SOURCE_MEMBERS	AI334281,AK021510,AL833457,BC111788,BG682876,BM458681,BQ877285,CK300639,NM_000618,NM_000875,NM_001040056,NM_001109891,NM_001111283,NM_001111284,NM_001111285,NM_001114123,NM_001130040,NM_001130041,NM_001130442,NM_001202859,NM_001242466,NM_001257168,NM_001895,NM_002086,NM_002228,NM_002649,NM_002746,NM_002750,NM_002755,NM_002834,NM_002880,NM_002890,NM_003029,NM_003131,NM_005229,NM_005252,NM_005343,NM_005544,NM_005633,NM_006218,NM_022650,NM_080601,NM_139046,NM_139047,NM_139049,NM_176795,NM_177559,NM_177560,NM_181504,NM_181523,NM_181524,NM_183001,NM_203506
+GENE_SYMBOLS	PIK3R1,PIK3CA,SOS1,IGF1,IGF1R,MAPK3,MAPK3,IGF1,IGF1,IGF1,ELK1,SHC1,SHC1,HRAS,SHC1,PIK3R1,ELK1,CSNK2A1,GRB2,JUN,PIK3CG,MAPK3,MAPK8,MAP2K1,PTPN11,RAF1,RASA1,SHC1,SRF,ELK1,FOS,HRAS,IRS1,SOS1,PIK3CA,RASA1,PTPN11,MAPK8,,MAPK8,HRAS,CSNK2A1,CSNK2A1,PIK3R1,PIK3R1,PIK3R1,SHC1,GRB2
+FOUNDER_NAMES	

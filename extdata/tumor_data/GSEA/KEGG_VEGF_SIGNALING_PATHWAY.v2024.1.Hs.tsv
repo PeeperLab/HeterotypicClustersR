@@ -1,0 +1,19 @@
+STANDARD_NAME	KEGG_VEGF_SIGNALING_PATHWAY
+SYSTEMATIC_NAME	M1749
+COLLECTION	C2:CP:KEGG_LEGACY
+MSIGDB_URL	https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/KEGG_VEGF_SIGNALING_PATHWAY
+NAMESPACE	Human_NCBI_Gene_ID
+DESCRIPTION_BRIEF	VEGF signaling pathway
+DESCRIPTION_FULL	There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic angiogenesis. The binding of VEGF to VEGFR-2 leads to a cascade of different signaling pathways, resulting in the up-regulation of genes involved in mediating the proliferation and migration of endothelial cells and promoting their survival and vascular permeability. For example, the binding of VEGF to VEGFR-2 leads to dimerization of the receptor, followed by intracellular activation of the PLCgamma;PKC-Raf kinase-MEK-mitogen-activated protein kinase (MAPK) pathway and subsequent initiation of DNA synthesis and cell growth, whereas activation of the phosphatidylinositol 3' -kinase (PI3K)-Akt pathway leads to increased endothelial-cell survival. Activation of PI3K, FAK, and p38 MAPK is implicated in cell migration signaling.
+PMID	
+GEOID	
+AUTHORS	
+CONTRIBUTOR	KEGG
+CONTRIBUTOR_ORG	Kyoto Encyclopedia of Genes and Genomes
+EXACT_SOURCE	hsa04370
+FILTERED_BY_SIMILARITY	
+EXTERNAL_NAMES_FOR_SIMILAR_TERMS	
+EXTERNAL_DETAILS_URL	http://www.genome.jp/pathway/hsa04370
+SOURCE_MEMBERS	10000,100137049,10725,11261,123745,1432,207,208,23533,25759,26279,30814,3265,3315,3791,3845,391013,4772,4773,4775,4776,4846,4893,50487,5290,5291,5293,5294,5295,5296,5319,5320,5321,5322,5335,5336,5530,5532,5533,5534,5535,5578,5579,5582,5594,5595,5600,5603,5604,5605,56848,572,5743,5747,5829,5879,5880,5881,5894,6300,63928,64600,6714,7422,7867,81579,8398,8399,842,84647,8503,8681,8877,9047,9261,998
+GENE_SYMBOLS	AKT3,PLA2G4B,NFAT5,CHP1,PLA2G4E,MAPK14,AKT1,AKT2,PIK3R5,SHC2,PLA2G2D,PLA2G2E,HRAS,HSPB1,KDR,KRAS,PLA2G2C,NFATC1,NFATC2,NFATC3,NFATC4,NOS3,NRAS,PLA2G3,PIK3CA,PIK3CB,PIK3CD,PIK3CG,PIK3R1,PIK3R2,PLA2G1B,PLA2G2A,PLA2G4A,PLA2G5,PLCG1,PLCG2,PPP3CA,PPP3CB,PPP3CC,PPP3R1,PPP3R2,PRKCA,PRKCB,PRKCG,MAPK1,MAPK3,MAPK11,MAPK13,MAP2K1,MAP2K2,SPHK2,BAD,PTGS2,PTK2,PXN,RAC1,RAC2,RAC3,RAF1,MAPK12,CHP2,PLA2G2F,SRC,VEGFA,MAPKAPK3,PLA2G12A,PLA2G6,PLA2G10,CASP9,PLA2G12B,PIK3R3,JMJD7-PLA2G4B,SPHK1,SH2D2A,MAPKAPK2,CDC42
+FOUNDER_NAMES	

@@ -1,0 +1,19 @@
+STANDARD_NAME	KEGG_APOPTOSIS
+SYSTEMATIC_NAME	M8492
+COLLECTION	C2:CP:KEGG_LEGACY
+MSIGDB_URL	https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/KEGG_APOPTOSIS
+NAMESPACE	Human_NCBI_Gene_ID
+DESCRIPTION_BRIEF	Apoptosis
+DESCRIPTION_FULL	Apoptosis is a genetically controlled mechanisms of cell death involved in the regulation of tissue homeostasis. The 2 major pathways of apoptosis are the extrinsic (Fas and other TNFR superfamily members and ligands) and the intrinsic (mitochondria-associated) pathways, both of which are found in the cytoplasm. The extrinsic pathway is triggered by death receptor engagement, which initiates a signaling cascade mediated by caspase-8 activation. Caspase-8 both feeds directly into caspase-3 activation and stimulates the release of cytochrome c by the mitochondria. Caspase-3 activation leads to the degradation of cellular proteins necessary to maintain cell survival and integrity. The intrinsic pathway occurs when various apoptotic stimuli trigger the release of cytochrome c from the mitochondria (independently of caspase-8 activation). Cytochrome c interacts with Apaf-1 and caspase-9 to promote the activation of caspase-3. Recent studies point to the ER as a third subcellular compartment implicated in apoptotic execution. Alterations in Ca2+ homeostasis and accumulation of misfolded proteins in the ER cause ER stress. Prolonged ER stress can result in the activation of BAD and/or caspase-12, and execute apoptosis.
+PMID	
+GEOID	
+AUTHORS	
+CONTRIBUTOR	KEGG
+CONTRIBUTOR_ORG	Kyoto Encyclopedia of Genes and Genomes
+EXACT_SOURCE	hsa04210
+FILTERED_BY_SIMILARITY	
+EXTERNAL_NAMES_FOR_SIMILAR_TERMS	
+EXTERNAL_DETAILS_URL	http://www.genome.jp/pathway/hsa04210
+SOURCE_MEMBERS	10000,11213,11261,1147,1439,1676,1677,2021,207,208,23052,23533,317,329,330,331,355,3551,3552,3553,3554,3556,356,3562,3563,3654,3656,4615,472,4790,4792,4803,4914,51135,5290,5291,5293,5294,5295,5296,54205,5530,5532,5533,5534,5535,5566,5567,5568,5573,5575,5576,5577,5613,572,581,596,5970,598,637,63928,651610,7124,7132,7157,7186,823,824,836,839,840,841,842,843,8503,8517,8717,8737,8743,8772,8793,8794,8795,8797,8837,9020,9131,9941
+GENE_SYMBOLS	AKT3,IRAK3,CHP1,CHUK,CSF2RB,DFFA,DFFB,ENDOG,AKT1,AKT2,ENDOD1,PIK3R5,APAF1,BIRC2,BIRC3,XIAP,FAS,IKBKB,IL1A,IL1B,IL1R1,IL1RAP,FASLG,IL3,IL3RA,IRAK1,IRAK2,MYD88,ATM,NFKB1,NFKBIA,NGF,NTRK1,IRAK4,PIK3CA,PIK3CB,PIK3CD,PIK3CG,PIK3R1,PIK3R2,CYCS,PPP3CA,PPP3CB,PPP3CC,PPP3R1,PPP3R2,PRKACA,PRKACB,PRKACG,PRKAR1A,PRKAR1B,PRKAR2A,PRKAR2B,PRKX,BAD,BAX,BCL2,RELA,BCL2L1,BID,CHP2,,TNF,TNFRSF1A,TP53,TRAF2,CAPN1,CAPN2,CASP3,CASP6,CASP7,CASP8,CASP9,CASP10,PIK3R3,IKBKG,TRADD,RIPK1,TNFSF10,FADD,TNFRSF10D,TNFRSF10C,TNFRSF10B,TNFRSF10A,CFLAR,MAP3K14,AIFM1,EXOG
+FOUNDER_NAMES	

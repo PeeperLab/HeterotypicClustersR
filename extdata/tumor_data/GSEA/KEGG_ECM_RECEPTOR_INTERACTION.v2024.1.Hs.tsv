@@ -1,0 +1,19 @@
+STANDARD_NAME	KEGG_ECM_RECEPTOR_INTERACTION
+SYSTEMATIC_NAME	M7098
+COLLECTION	C2:CP:KEGG_LEGACY
+MSIGDB_URL	https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/KEGG_ECM_RECEPTOR_INTERACTION
+NAMESPACE	Human_NCBI_Gene_ID
+DESCRIPTION_BRIEF	ECM-receptor interaction
+DESCRIPTION_FULL	The extracellular matrix (ECM) consists of a complex mixture of structural and functional macromolecules and serves an important role in tissue and organ morphogenesis and in the maintenance of cell and tissue structure and function. Specific interactions between cells and the ECM are mediated by transmembrane molecules, mainly integrins and perhaps also proteoglycans, CD36, or other cell-surface-associated components. These interactions lead to a direct or indirect control of cellular activities such as adhesion, migration, differentiation, proliferation, and apoptosis. In addition, integrins function as mechanoreceptors and provide a force-transmitting physical link between the ECM and the cytoskeleton. Integrins are a family of glycosylated, heterodimeric transmembrane adhesion receptors that consist of noncovalently bound alpha- and beta-subunits.
+PMID	
+GEOID	
+AUTHORS	
+CONTRIBUTOR	KEGG
+CONTRIBUTOR_ORG	Kyoto Encyclopedia of Genes and Genomes
+EXACT_SOURCE	hsa04512
+FILTERED_BY_SIMILARITY	
+EXTERNAL_NAMES_FOR_SIMILAR_TERMS	
+EXTERNAL_DETAILS_URL	http://www.genome.jp/pathway/hsa04512
+SOURCE_MEMBERS	10319,1101,1277,1278,1280,1281,1282,1284,1286,1288,1289,1290,1291,1292,1293,1301,1302,1311,131873,1605,22798,22801,22987,2335,2811,2812,2814,2815,284217,3161,3339,3371,3381,3655,3672,3673,3674,3675,3676,3678,3679,3680,3685,3688,3690,3691,3693,3694,3695,3696,375790,3908,3909,3910,3911,3912,3913,3914,3915,3918,50509,51206,5649,6382,6383,6385,63923,6696,7057,7058,7059,7060,7143,7148,7448,7450,8515,8516,948,960,961,9672,9899,9900
+GENE_SYMBOLS	LAMC3,CHAD,COL1A1,COL1A2,COL2A1,COL3A1,COL4A1,COL4A2,COL4A4,COL4A6,COL5A1,COL5A2,COL6A1,COL6A2,COL6A3,COL11A1,COL11A2,COMP,COL6A6,DAG1,LAMB4,ITGA11,SV2C,FN1,GP1BA,GP1BB,GP5,GP9,LAMA1,HMMR,HSPG2,TNC,IBSP,ITGA6,ITGA1,ITGA2,ITGA2B,ITGA3,ITGA4,ITGA5,ITGA7,ITGA9,ITGAV,ITGB1,ITGB3,ITGB4,ITGB5,ITGB6,ITGB7,ITGB8,AGRN,LAMA2,LAMA3,LAMA4,LAMA5,LAMB1,LAMB2,LAMB3,LAMC1,LAMC2,COL5A3,GP6,RELN,SDC1,SDC2,SDC4,TNN,SPP1,THBS1,THBS2,THBS3,THBS4,TNR,TNXB,VTN,VWF,ITGA10,ITGA8,CD36,CD44,CD47,SDC3,SV2B,SV2A
+FOUNDER_NAMES	
