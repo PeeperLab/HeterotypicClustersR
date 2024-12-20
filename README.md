@@ -10,7 +10,7 @@ scRepertoire == 2.0.4
 Nichenet == 2.2.0  
 
 # Overview
-The Scripts are seperated into following analysis:    
+The Scripts contains following analysis:    
 [1. Main](https://github.com/PeeperLab/HeterotypicClustersR/tree/main/Scripts/1.Main) - Workflow for processing cell ranger outputs of aligned sequencing samples and integrating samples for cell types identification.     
 [2. Plots](https://github.com/PeeperLab/HeterotypicClustersR/tree/main/Scripts/2.Plots) - celltype specific analysis  
 [3. Signatures](https://github.com/PeeperLab/HeterotypicClustersR/tree/main/Scripts/3.Signatures) - cluster signature analysis  
