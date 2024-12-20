@@ -1,5 +1,6 @@
 # HeterotypicClustersR (Latest Updates:2024-12-20)
 This repository contains the scripts related to the analysis of scRNA seq and scTCR seq from the clusters datasets. 
+![My Image](https://github.com/PeeperLab/HeterotypicClustersR/blob/main/extdata/workflow_fig.jpeg)
 # Dependencies
 R > 4.3.1  
 Seurat == 4.4.0  
