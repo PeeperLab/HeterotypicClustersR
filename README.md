@@ -8,3 +8,15 @@ AUCell == 1.24.1
 scRepertoire == 2.0.4  
 Nichenet == 2.2.0  
 
+#Overview
+The Scripts are seperated into following analysis:  
+1. Main - Workflow for processing cell ranger outputs of aligned sequencing samples and integrating samples for cell types identification. Identified samples are annotated in seperate scripts.
+2. Plots - celltype specific analysis
+3. Signatures - cluster signature analysis
+4. Nichenet - cell-cell interactions analysis among clusters groups
+5. Reactivity - Tcell reactivity analysis
+6. Stats - clusters enrichment statistics
+7. TCR_activity - TCR activity comparison between clusters and singlets
+8. Tumor_Analysis - Tumor cluster enrichment analysis  
+9. Infer_CNV - Inferred copy number analysis of tumor cells
+10. Response - Cluster signature distribution analysis in Barras response data    
