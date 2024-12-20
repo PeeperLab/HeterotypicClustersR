@@ -10,7 +10,7 @@ Nichenet == 2.2.0
 
 # Overview
 The Scripts are seperated into following analysis:  
-1. Main - Workflow for processing cell ranger outputs of aligned sequencing samples and integrating samples for cell types identification. Identified samples are annotated in seperate scripts.
+1. Main - Workflow for processing cell ranger outputs of aligned sequencing samples and integrating samples for cell types identification.   
 2. Plots - celltype specific analysis
 3. Signatures - cluster signature analysis
 4. Nichenet - cell-cell interactions analysis among clusters groups
