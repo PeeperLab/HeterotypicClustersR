@@ -16,14 +16,15 @@ library(ComplexHeatmap)
 fig_path = "Results_clonotype_comparison"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
-tcr_ids=fread("Meta_data_TCRs_Tcells.txt")
+tcr_ids=fread("Results_Tcells_Plots/Meta_data_TCRs_Tcells.txt")
+
 tcr_ids$barcode<-paste0(tcr_ids$combined_id,"_",tcr_ids$cell_id)
 tcr_ids<-tcr_ids[,c("barcode","combined_id","patient_id","chain_cdr3")]
 colnames(tcr_ids)<-c("barcode", "sample" ,"patient_id", "TCR" )
 
 tcr_ids[, cell_id:= gsub(paste0(sample,"_"), "", barcode), by="sample"]
 
-auc57=readRDS("auc_numbers_merged.rds")
+auc57=readRDS("Results_AUC_object/auc_numbers_merged.rds")
 setDT(auc57)
 auc57$cell_id=gsub("\\.","-",auc57$cell_id)
 
@@ -74,7 +75,10 @@ mavg_sample[,variable:= factor(variable, levels = c("Virus sp, Oliv.","Tum sp, O
                                              "Cytotoxicity","TCR signaling","db_30","db_100", "Exh. Yost",
                                              "Exh. Tirosh", "CD28 signaling", "CTLA4 signaling"))]
 
-ggplot(mavg_sample[variable %in% c("Virus sp, Oliv.","Tum sp, Oliv.", "React., Offringa","React., Lowery"),], aes(sample_id, value, fill=sample_id))+
+mavg<-mavg_sample[variable %in% c("Virus sp, Oliv.","Tum sp, Oliv.", "React., Lowery","React., Offringa"),]
+mavg[, variable:=factor(variable, levels=c("Virus sp, Oliv.","Tum sp, Oliv.", "React., Lowery","React., Offringa"))]
+
+ggplot(mavg, aes(sample_id, value, fill=sample_id))+
   geom_violin()+geom_boxplot(alpha=.4)+
   stat_compare_means(size=3,comparisons = list(c("DB_APC_Tcell", "DB_Tumor_Tcell"),
                                                c("DB_Tumor_Tcell","SG_Singlets"),
@@ -86,9 +90,13 @@ ggplot(mavg_sample[variable %in% c("Virus sp, Oliv.","Tum sp, Oliv.", "React., O
         legend.position = "none",
         strip.text = element_text(size=8),
         strip.background = element_rect( linewidth = 0, fill="white"))+
-  ylab("Avg signature score per TCR group")+xlab("")+
+  ylab("Avg signature score per TCR group")+xlab("")+theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )+
   scale_fill_manual(values=c(DB_APC_Tcell="#009052",
                              DB_Tumor_Tcell="#825d9e",
                              SG_Singlets = "#7cd3f7"))
-ggsave("Results_clonotype_comparison/heatmap_panel_across_all_pseudo_clonotypes_all_pats_tcrs_2.pdf", width=22, height=5)
+ggsave("Results_clonotype_comparison/heatmap_panel_across_all_pseudo_clonotypes_all_pats_tcrs_4.pdf", width=12, height=8)
 
+#write.csv(mavg_sample[variable %in% c("Virus sp, Oliv.","Tum sp, Oliv.", "React., Offringa","React., Lowery"),],"Results_clonotype_comparison/heatmap_panel_across_all_pseudo_clonotypes_all_pats_tcrs.csv")
