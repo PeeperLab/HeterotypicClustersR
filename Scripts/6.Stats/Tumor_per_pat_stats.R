@@ -93,7 +93,7 @@ per_pat_enrichment=function(OBJ){
   return(results)
 }
 
-tum_res=per_pat_enrichment(readRDS("Tumor_Annotated.Rds"))
+tum_res=per_pat_enrichment(readRDS("Results_tumor/Tumor_Annotated.Rds"))
 
 tum_res[, sig_symbol := ifelse(padj_1 < 0.0001, "****",
                               ifelse(padj_1 < 0.001, "***",
