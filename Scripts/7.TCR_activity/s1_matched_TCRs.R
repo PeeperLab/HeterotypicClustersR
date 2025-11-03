@@ -12,15 +12,19 @@ library(data.table)
 library(Seurat)
 set.seed(150799)
 
-five_pat=readRDS("Tcells_Final.Rds")
+fig_path = "Results_TCR_Reactivity"
+if(!dir.exists(fig_path)) dir.create(fig_path)
+
+five_pat=readRDS("Results_Tcells/Tcells_Final.Rds")
 
 tcr_ids=fread("Meta_data_TCRs_Tcells.txt")
+#tcr_ids=fread("TCR_filtered_five_pats.txt")
 tcr_ids$barcode<-paste0(tcr_ids$combined_id,"_",tcr_ids$cell_id)
 tcr_ids<-tcr_ids[,c("barcode","combined_id","patient_id","chain_cdr3")]
 colnames(tcr_ids)<-c("barcode", "sample" ,"patient_id", "TCR" )
 
 
-auc57=readRDS("auc_numbers_merged.rds")
+auc57=readRDS("Results_AUC_object/auc_numbers_merged.rds")
 setDT(auc57)
 auc57$cell_id=gsub("\\.","-",auc57$cell_id)
 
@@ -110,7 +114,8 @@ ggplot(all_auc_tcr[variable %in% c("Exh., Tirosh",
   ylab("AUC score per pat_TCR")+
   geom_line(aes(group=patient_TCR, col=patient_id))+xlab("")+
   scale_color_manual(values=c("P2"="#3b528b", "P3"="#21918c", "P4"="#5ec962", "P5"="#fde725"))
-ggsave("matched_tcrs_exhaustion_costimulation.pdf", width=5.5, height=4)
+ggsave("Results_TCR_Reactivity/matched_tcrs_exhaustion_costimulation.pdf", width=5.5, height=4)
 
 
-
+write.csv(all_auc_tcr[variable %in% c("Exh., Tirosh",
+                            "CD28 signaling","CTLA4 signaling"),],"Results_TCR_Reactivity/matched_tcrs_exhaustion_costimulation.csv")
