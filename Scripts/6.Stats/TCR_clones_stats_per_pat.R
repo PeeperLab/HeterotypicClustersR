@@ -14,7 +14,7 @@ library(dplyr)
 fig_path = "Results_stats"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
-S_pat_all_t_cells = readRDS("Tcells_Final.Rds")
+S_pat_all_t_cells = readRDS("Results_Tcells/Tcells_Final.Rds")
 md = S_pat_all_t_cells@meta.data
 md$cell_id = rownames(md)
 
