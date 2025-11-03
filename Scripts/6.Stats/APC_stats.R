@@ -18,7 +18,7 @@ fig_path = "Results_stats"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
 # Load the objects of interest
-all_apcs=readRDS("apc_data_filtered_fvf_corr.rds")
+all_apcs=readRDS("Results_APCs/apc_data_filtered_fvf_corr.rds")
 
 metadata=setDT(data.frame(all_apcs@meta.data))
 metadata=metadata[sample_id!="DB_Tumor_Tcell",] # remove 
