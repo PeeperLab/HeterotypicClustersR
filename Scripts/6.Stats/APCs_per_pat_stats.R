@@ -99,9 +99,9 @@ per_pat_enrichment=function(OBJ){
   return(results)
 }
 
-mm_res=per_pat_enrichment(readRDS("final_mm_fvf_corr.rds"))
-dc_res=per_pat_enrichment(subset(readRDS("final_dc_fvf_corr.rds"), patient_id %in% c("P2","P3","P5")))
-bb_res=per_pat_enrichment(subset(readRDS("final_bcell_fvf_corr.rds"), patient_id %in% c("P3","P5")))
+mm_res=per_pat_enrichment(readRDS("Results_APCs/final_mm_fvf_corr.rds"))
+dc_res=per_pat_enrichment(subset(readRDS("Results_APCs/final_dc_fvf_corr.rds"), patient_id %in% c("P2","P3","P5")))
+bb_res=per_pat_enrichment(subset(readRDS("Results_APCs/final_bcell_fvf_corr.rds"), patient_id %in% c("P3","P5")))
 
 fwrite(mm_res, "Results_stats/mono_mac_per_pat.txt")
 fwrite(dc_res, "Results_stats/dc_per_pat.txt")
