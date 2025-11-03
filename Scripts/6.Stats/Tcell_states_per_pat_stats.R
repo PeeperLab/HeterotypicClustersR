@@ -91,7 +91,7 @@ per_pat_enrichment=function(OBJ){
   return(results)
 }
 
-obj=readRDS("Tcells_Final.Rds")
+obj=readRDS("Results_Tcells/Tcells_Final.Rds")
 tcell_res=per_pat_enrichment(obj)
 
 tcell_res[, sig_symbol := ifelse(padj_1 < 0.0001, "****",
