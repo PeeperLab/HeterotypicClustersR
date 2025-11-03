@@ -13,12 +13,13 @@ library(data.table)
 library(nichenetr)
 library(dplyr)
 library(tidyverse)
+library(data.table)
 
 fig_path = "Results_general_distribution"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
 # get the T cell compartment (Receivers) 
-tcells=readRDS("Tcells_Final.Rds")
+tcells=readRDS("Results_Tcells/Tcells_Final.Rds")
 meta_t=tcells@meta.data
 meta_t=meta_t[,c(5,5)] #only care about sample_id
 colnames(meta_t)[2]="mid_divisions"
@@ -27,7 +28,7 @@ meta_t$class=rep("cd8", nrow(meta_t))
 meta_t$phenotypes=tcells$annotated_clusters_labels_final
 
 # get the APCs (senders)
-all_apcs=readRDS("apc_data_filtered_fvf_corr.rds")
+all_apcs=readRDS("Results_APCs/apc_data_filtered_fvf_corr.rds")
 
 all_apcs=subset(all_apcs, subset= sample_id != "DB_Tumor_Tcell")
 apc_groups=unique(all_apcs$major_classes)
@@ -39,7 +40,7 @@ colnames(meta_a)[3]="class"
 meta_a$phenotypes=all_apcs$hi_res_clus
 
 # get the Tumor (senders)
-all_tum=readRDS("Tumor_Annotated.Rds")
+all_tum=readRDS("Results_tumor/Tumor_Annotated.Rds")
 all_tum=subset(all_tum, sample_id != "DB_APC_Tcell")
 all_tum=subset(all_tum, annotated_clusters != "Low Gene Count Cells")
 DefaultAssay(all_tum) <- "RNA"
@@ -51,7 +52,7 @@ meta_tum$class=rep("tum", nrow(meta_tum))
 meta_tum$phenotypes=all_tum$annotated_clusters
 
 # get the combined object
-all_cells=readRDS("Combined_All_Cells.Rds")
+all_cells=readRDS("Results_Main/Combined_All_Cells.Rds")
 meta_tot=rbind(meta_t, meta_a)
 meta_tot=rbind(meta_tot, meta_tum)
 meta_tot$final_divisions=ifelse(meta_tot$mid_divisions=="cd8", paste0(meta_tot$sample_id,"_",meta_tot$mid_divisions),
@@ -76,7 +77,7 @@ weighted_networks <- readRDS(url("https://zenodo.org/record/7074291/files/weight
 
 # custom, step by step nichenet
 # # get restricted possibilities
-curated_pairs= fread("s0_potential_pairs.txt")
+curated_pairs= fread("Results_Nichenet/s0_potential_pairs.txt")
 
 # # expressed ligands & receptors
 Idents(filt_cells)="class"
@@ -107,7 +108,7 @@ background_expressed_genes <- expressed_genes_receiver %>%
 Idents(filt_cells)="interaction"
 
 # # # get the DGE comparison from the interaction_signature.R
-tcell_db_sg=fread("complete_comparison.txt") #should be generated previously
+tcell_db_sg=fread("Results_create_signature/complete_comparison.txt") #should be generated previously
 setorder(tcell_db_sg, -avg_log2FC)
 goi=tcell_db_sg[p_val_adj<0.05 & avg_log2FC>0.1 & pct.1>0.05,]$gene # low pct threshold to include subtype specific
 ligand_activities <-  predict_ligand_activities(geneset = goi,
@@ -224,11 +225,11 @@ vis_circos_receptor_obj <- prepare_circos_visualization(lr_network_top_df,
   celltype_order = cell_order) 
 
 # # load modified circos plot function with minimum transparency adjustment
-source("min_thres_circos.R")
+source("Scripts/4.Nichenet/min_thres_circos.R")
 library(circlize)
 pdf("Results_general_distribution/confidence_pairs_all.groups.pdf", width=7.7, height=7.7)
 min_thres_circos(vis_circos_receptor_obj, transparency = TRUE,
                  link.visible = TRUE,  args.circos.text = list(cex = 0.8))
 dev.off()
 
-
+write.csv(lr_network_top_df,"Results_general_distribution/lr_network_top_df_all.groups.csv")
