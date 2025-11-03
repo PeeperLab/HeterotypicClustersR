@@ -20,7 +20,7 @@ fig_path = "Results_stats"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
 # reformat the data into a counts table
-S_pat_all_t_cells = readRDS("Tcells_Final.Rds")
+S_pat_all_t_cells = readRDS("Results_Tcells/Tcells_Final.Rds")
 
 md = S_pat_all_t_cells@meta.data
 md$cell_id = rownames(md)
@@ -99,7 +99,7 @@ metadata_to_sig_enrichment=function(dataset.complete){
   results_Tumor$seurat_cluster <- unique(dataset1$top_clones)
   results_Tumor$comparison <- rep(paste('SG','DB_Tumor',sep='-'),nrow(results_Tumor))
   
-  # nowfor APC
+  # now for APC
   dataset2 <- dataset.complete[which(dataset.complete$sample_id %in% c('SG_Singlets','DB_APC_Tcell')),]
   
   results_APC <- NULL
