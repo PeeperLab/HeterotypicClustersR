@@ -17,7 +17,7 @@ fig_path = "Results_stats"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
 # reformat the data into a counts table
-sc.combined<-readRDS("Tcells_Final.Rds")
+sc.combined<-readRDS("Results_Tcells/Tcells_Final.Rds")
 metadata<-sc.combined@meta.data
 
 #########
