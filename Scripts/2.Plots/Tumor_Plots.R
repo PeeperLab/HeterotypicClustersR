@@ -19,7 +19,7 @@ library(circlize)
 fig_path = "Results_Tumor_Plots"
 if(!dir.exists(fig_path)) dir.create(fig_path) 
 
-pbmc.combined<-readRDS("Tumor_Annotated.Rds")
+pbmc.combined<-readRDS("Results_tumor/Tumor_Annotated.Rds")
 
 
 #Remove Low Gene Count Cells group from further analysis
@@ -83,6 +83,7 @@ ggplot(data_total) +
         panel.grid.minor = element_blank())  +
   scale_fill_manual(name ="Tumor phenotypes:",values = color_combo2) +facet_grid(.~patients)
 dev.off()
+write.csv(data_total,"Results_Tumor_Plots/Tumor_Annotated_clusters_distribution_per_patient.csv")
 
 
 data_combined = data_total %>% 
@@ -101,10 +102,12 @@ ggplot(data_combined) +
         panel.grid.minor = element_blank())  +
   scale_fill_manual(name ="Tumor phenotypes:", values = color_combo2)
 dev.off()
+write.csv(data_combined,"Results_Tumor_Plots/Tumor_Annotated_clusters_distribution.csv")
+
 ########################################################
 ###TUMOR SIGNATURE ANALYSIS########
 ########################################################
-Tumor_Signatures <- read.csv("Tumor_Signatures.csv", row.names=1)
+Tumor_Signatures <- read.csv("extdata/tumor_data/Tumor_Signatures.csv", row.names=1)
 
 
 cell_types <-  unique(Tumor_Signatures$Signature)
@@ -146,8 +149,8 @@ AUCell_matrix <- as.matrix(aggregated_AUCell[, -1])
 rownames(AUCell_matrix) <- aggregated_AUCell$annotated_clusters
 
 
-order<-c("Immune Response" ,"Mitotic" ,"Patient Specific" ,"Melanocytic" ,"Transitory Melanocytic",
-         "Stress(p53 response)" ,"Neural Crest Like" ,"Stress(hypoxia response)")
+order<-c("Immune Response" ,"Mitotic" ,"Melanocytic" ,"Transitory Melanocytic","Patient Specific" ,
+         "Stress(hypoxia response)", "Stress(p53 response)" ,"Neural Crest Like" )
 AUCell_matrix_order_row<-AUCell_matrix[order,]
 
 transposed_matrix <- t(AUCell_matrix_order_row)
@@ -155,13 +158,15 @@ transposed_matrix <- t(AUCell_matrix_order_row)
 Sig_order<-c("Rambow Immune", "Pozniak Antigen_presentation",
              "Pozniak Mitotic","Rambow mitosis",
              "Wouters Melanocytic cell state",  "Tsoi Melanocytic","Rambow MITFtargets",  "Rambow pigmentation", 
-             "Tsoi Transitory-Melanocytic","Tsoi Transitory",
+             "Tsoi Transitory-Melanocytic","Tsoi Transitory","Pozniak Stress (hypoxia response)",
              "Pozniak Stress (p53 response)",
-             "Rambow Neuro", "Tsoi Neural crest-like","Pozniak Neural_Crest_like",
-             "Pozniak Stress (hypoxia response)"
+             "Rambow Neuro", "Tsoi Neural crest-like","Pozniak Neural_Crest_like"
+             
 )
 
 transposed_matrix_ordered<-transposed_matrix[Sig_order,]
+
+write.csv(as.data.frame(transposed_matrix_ordered),"Results_Tumor_Plots/AUC_HeatMap_Tumor_Signatures.csv")
 
 scaled_matrix <- t(scale(t(transposed_matrix_ordered), center = TRUE, scale = TRUE))
 
@@ -186,10 +191,11 @@ ht7 <- Heatmap(
 pdf("Results_Tumor_Plots/HeatMap_Tumor_Signatures.pdf",width=50,height=40)
 draw(ht7, heatmap_legend_side = "left")  
 dev.off()
+
 ######################################################################
 ###Enriched GSEA pathway Heatmap##########
 ######################################################################
-input_dir <- "./GSEA" 
+input_dir <- "extdata/tumor_data/GSEA" 
 
 # List all TSV files in the directory
 tsv_files <- list.files(input_dir, pattern = "\\.tsv$", full.names = TRUE)
@@ -269,8 +275,8 @@ AUCell_matrix <- as.matrix(aggregated_AUCell[, -1])
 rownames(AUCell_matrix) <- aggregated_AUCell$annotated_clusters
 
 
-order<-c("Immune Response" ,"Mitotic" ,"Patient Specific" ,"Melanocytic" ,"Transitory Melanocytic",
-         "Stress(p53 response)" ,"Neural Crest Like" ,"Stress(hypoxia response)")
+order<-c("Immune Response" ,"Mitotic" ,"Melanocytic" ,"Transitory Melanocytic","Patient Specific" ,
+         "Stress(hypoxia response)", "Stress(p53 response)" ,"Neural Crest Like" )
 AUCell_matrix_order_row<-AUCell_matrix[order,]
 
 transposed_matrix <- t(AUCell_matrix_order_row)
@@ -279,12 +285,12 @@ Pathway_order<-c("Interferon alpha/beta signaling","PD-1 signaling","Antigen Pre
                  "Cell cycle","AURKA Activation by TPX2","PKR-mediated signaling" ,"Genes up-regulated through activation of mTORC1 complex.","Genes up-regulated by activation of the PI3K/AKT/mTOR pathway.",
                  "Melanin biosynthesis",
                  "Translation","Genes encoding proteins involved in oxidative phosphorylation.",
+                 "Genes up-regulated in response to low oxygen levels (hypoxia).","Genes encoding proteins involved in glycolysis" , 
                  "Apoptosis" ,"VEGF signaling pathway","Genes up-regulated by activation of WNT signaling" ,"IGF-1 Signaling Pathway",
-                 "ECM-receptor interaction",
-                 "Genes up-regulated in response to low oxygen levels (hypoxia).","Genes encoding proteins involved in glycolysis"  
-)
+                 "ECM-receptor interaction")
 
 transposed_matrix_ordered<-transposed_matrix[Pathway_order,]
+write.csv(as.data.frame(transposed_matrix_ordered),"Results_Tumor_Plots/AUC_HeatMap_Tumor_Pathways.csv")
 
 scaled_matrix <- t(scale(t(transposed_matrix_ordered), center = TRUE, scale = TRUE))
 
@@ -309,7 +315,6 @@ ht7 <- Heatmap(
 pdf("Results_Tumor_Plots/HeatMap_Tumor_Pathways.pdf",width=50,height=40)
 draw(ht7, heatmap_legend_side = "left")  
 dev.off()
-
 ###Tumor Clusters/Singlets distribution in UMAP
 pbmc.combined@meta.data$source_id[pbmc.combined@meta.data$sample_id == 'SG_Singlets'] <- "Tumor cells from singlets"
 pbmc.combined@meta.data$source_id[pbmc.combined@meta.data$sample_id == 'DB_Tumor_Tcell'] <- "Tumor cells from tumor clusters"
@@ -359,7 +364,7 @@ ggplot(md_freq_bar_sample) +
         panel.grid.minor = element_blank())  +
   scale_fill_manual(name ="Source:",values = color_combo_sample) 
 dev.off()
-
+write.csv(md_freq_bar_sample,"Results_Tumor_Plots/Tumor_Sample_Distributions_Counts.csv")
 
 #Patient Distribution
 
@@ -393,5 +398,7 @@ ggplot(md_freq_bar) +
         panel.grid.minor = element_blank())  +
   scale_fill_manual(name ="Patients:",values = color_combo) +coord_flip()
 dev.off()
+
+write.csv(md_freq_bar,"Results_Tumor_Plots/Tumor_Patient_Distributions.csv")
 
 
