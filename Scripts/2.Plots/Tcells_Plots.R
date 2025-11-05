@@ -16,7 +16,7 @@ library(scRepertoire)
 fig_path = "Results_Tcells_Plots"
 if(!dir.exists(fig_path)) dir.create(fig_path) 
 
-tcell.combined<-readRDS("Tcells_Final.Rds")
+tcell.combined<-readRDS("Results_Tcells/Tcells_Final.Rds")
 
 ##########################################
 #Dotplot with defined t cell states
@@ -148,7 +148,7 @@ ggplot(data_total) +
         panel.grid.minor = element_blank()) +
   scale_fill_manual(name ="CD8+ T cell states:",values = color_combo) + facet_grid(.~patients)+theme(text=element_text(size=16))
 dev.off()
-
+#write.csv(data_total,"Results_Tcells_Plots/Tcells_states_clusters_distribution_per_patient.csv")
 ##All Patient together phenotype distribution
 
 mean_freq = data_total %>% 
@@ -165,6 +165,7 @@ ggplot(mean_freq) +
         panel.grid.minor = element_blank()) +
   scale_fill_manual(name ="CD8+ T cell states:",values = color_combo) 
 dev.off()
+#write.csv(mean_freq,"Results_Tcells_Plots/Tcell_cellstates_distribution_across_clusters_and_singlets.csv")
 
 ########### TCR Clonality distribution Among clusters ##############################################################################
 #Here Initially we 
@@ -293,13 +294,14 @@ for (sample_x in sample_names_table$V2){
 # only cells with a TCRs
 md_tcr <- md[!is.na(md$chain_cdr3),]
 # quick save, with cluster names and frequency
-write.table(md_tcr,"./Meta_data_TCRs_Tcells.txt",quote=F,row.names =F,sep="\t")
+write.table(md_tcr,"Results_Tcells_Plots/Meta_data_TCRs_Tcells.txt",quote=F,row.names =F,sep="\t")
+
 
 md_tcr_freq <- md_tcr %>% 
   group_by(combined_id, chain_cdr3) %>% 
   dplyr::summarize(n=n()) %>% 
   mutate(freq=n/sum(n), total=sum(n))
-write.table(md_tcr_freq,"./Meta_data_TCRs_Tcells_frequency.txt",quote=F,row.names =F,sep="\t")
+write.table(md_tcr_freq,"Results_Tcells_Plots/Meta_data_TCRs_Tcells_frequency.txt",quote=F,row.names =F,sep="\t")
 
 set.seed(10)
 library(tibble)
@@ -366,7 +368,7 @@ ggplot(md_freq_sum,aes(x=clusters,y=freq_sum,fill=combined_tcr)) +
         legend.key=element_rect(fill=NA),panel.grid.major = element_blank(), panel.grid.minor = element_blank())+ theme(legend.position = "none")+
   facet_grid(.~patients) 
 dev.off()
-
+write.csv(md_freq_sum,"Results_Tcells_Plots/Top_TCRs_across_clusters_per_patient_Supps_tcells1_H.csv")
 
 
 md_freq_all = md_freq_sum %>%
@@ -403,6 +405,7 @@ ggplot(md_freq_all,aes(x=clusters,y=freq_all,fill=combined_tcr)) +
         legend.key=element_rect(fill=NA),panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
 dev.off()
 
+#write.csv(md_freq_all,"Results_Tcells_Plots/top_TCRs_across_clusters.csv")
 
 
 ###Patients Distribution  in Phenotypes ###########################################################################
@@ -426,6 +429,7 @@ color_combo<-c("Patient 1" = "#440154",
                "Patient 3"=	"#21918c"	,
                "Patient 4"=	"#5ec962"	,
                "Patient 5"="#fde725")
+
 pdf(paste0("Results_Tcells_Plots/","Tcells_patient_distribution.pdf"),height=5,width=6.5)
 ggplot(md_freq_bar) + 
   geom_bar(aes(x = n, y = annotated_clusters_labels_final, fill = patients), stat = "identity") +  # Adjusting y aesthetic
@@ -436,6 +440,7 @@ ggplot(md_freq_bar) +
         panel.grid.minor = element_blank())  +
   scale_fill_manual(name ="Patients:",values = color_combo)+ylab(" ")+xlab("Counts")
 dev.off()
+write.csv(md_freq_bar,"Results_Tcells_Plots/Tcells_patient_distribution.csv")
 
 ###Clusters Distribution  in CD8+ T cell Phenotypes ###########################################################################
 
@@ -466,7 +471,7 @@ ggplot(md_freq_bar_sample) +
         panel.grid.minor = element_blank())  +
   scale_fill_manual(name ="Clusters:",values = color_combo_sample) 
 dev.off()
-
+write.csv(md_freq_bar_sample,"Results_Tcells_Plots/Tcells_sample_distributions.csv")
 tcell.combined@meta.data$sample_final[tcell.combined@meta.data$sample_id==c("SG_Singlets")]<-"Single T cells"
 tcell.combined@meta.data$sample_final[tcell.combined@meta.data$sample_id==c("DB_Tumor_Tcell")]<-"T cells from tumor clusters"
 tcell.combined@meta.data$sample_final[tcell.combined@meta.data$sample_id==c("DB_APC_Tcell")]<-"T cells from APC clusters"
