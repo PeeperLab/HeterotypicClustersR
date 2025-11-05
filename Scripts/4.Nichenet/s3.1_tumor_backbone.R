@@ -18,12 +18,13 @@ if(!dir.exists(fig_path)) dir.create(fig_path)
 
 # load the nichenet databases (https://github.com/saeyslab/nichenetr/blob/master/vignettes/seurat_wrapper.md)
 lr_network <- readRDS(url("https://zenodo.org/record/7074291/files/lr_network_human_21122021.rds"))
+options(timeout = 300)
 ligand_target_matrix = readRDS(url("https://zenodo.org/record/7074291/files/ligand_target_matrix_nsga2r_final.rds")) 
 weighted_networks <- readRDS(url("https://zenodo.org/record/7074291/files/weighted_networks_nsga2r_final.rds"))
 
-tcells=readRDS("Tcells_Final.Rds")
-all_cells=readRDS("Combined_All_Cells.Rds")
-curated_pairs= fread("s0_potential_pairs.txt")
+tcells=readRDS("Results_Tcells/Tcells_Final.Rds")
+all_cells=readRDS("Results_Main/Combined_All_Cells.Rds")
+curated_pairs= fread("Results_Nichenet/s0_potential_pairs.txt")
 qc_ligands=curated_pairs$from
 qc_receptors=curated_pairs$to
 
@@ -35,7 +36,7 @@ qc_receptors=curated_pairs$to
   meta_t$class=rep("cd8", nrow(meta_t))
   
   # get the tumor (senders)
-  all_tum=readRDS("Tumor_Annotated.Rds")
+  all_tum=readRDS("Results_tumor/Tumor_Annotated.Rds")
   all_tum=subset(all_tum, annotated_clusters != "Low Gene Count Cells") 
   all_tum=subset(all_tum, subset= sample_id != "DB_APC_Tcell")
   tum_groups=unique(all_tum$annotated_clusters)
@@ -120,4 +121,5 @@ qc_receptors=curated_pairs$to
   results=lr_network_filtered[lr_pair %in% curated_pairs$lr_pair,] #double check
   fwrite(results, paste0("Results_Tumor_nn/backbone_tum_nn_results.txt"))
 
+  
 
