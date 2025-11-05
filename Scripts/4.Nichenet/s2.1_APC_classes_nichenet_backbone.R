@@ -23,9 +23,9 @@ lr_network <- readRDS(url("https://zenodo.org/record/7074291/files/lr_network_hu
 ligand_target_matrix = readRDS(url("https://zenodo.org/record/7074291/files/ligand_target_matrix_nsga2r_final.rds")) 
 weighted_networks <- readRDS(url("https://zenodo.org/record/7074291/files/weighted_networks_nsga2r_final.rds"))
 
-tcells=readRDS("Tcells_Final.Rds")
-all_cells=readRDS("Combined_All_Cells.Rds")
-curated_pairs= fread("s0_potential_pairs.txt")
+tcells=readRDS("Results_Tcells/Tcells_Final.Rds")
+all_cells=readRDS("Results_Main/Combined_All_Cells.Rds")
+curated_pairs= fread("Results_Nichenet/s0_potential_pairs.txt")
 qc_ligands=curated_pairs$from
 qc_receptors=curated_pairs$to
 
@@ -131,15 +131,15 @@ nichenet_analysis_per_class=function(SELECTED_PATS,OBJECT,DEFINED_CLUSTERS,CLASS
 
 
 nichenet_analysis_per_class(SELECTED_PATS = c("P3","P5"),
-                            OBJECT = "final_bcell_fvf_corr.rds",
+                            OBJECT = "Results_APCs/final_bcell_fvf_corr.rds",
                             CLASS = "B_cells")
 
 nichenet_analysis_per_class(SELECTED_PATS = c("P2","P3","P5"),
-                            OBJECT = "final_dc_fvf_corr.rds",
+                            OBJECT = "Results_APCs/final_dc_fvf_corr.rds",
                             CLASS = "DCs")
 
 nichenet_analysis_per_class(SELECTED_PATS = c("P1","P2","P3","P4","P5"),
-                            OBJECT = "final_mm_fvf_corr.rds",
+                            OBJECT = "Results_APCs/final_mm_fvf_corr.rds",
                             CLASS = "mono_mac")
 
 
