@@ -18,7 +18,7 @@ fig_path = "Results_Tumor_nn"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
 # # create the T cell annotation
-tcells=readRDS("Tcells_Final.Rds")
+tcells=readRDS("Results_Tcells/Tcells_Final.Rds")
 tcells$annotated_clusters_final_red=ifelse(tcells$annotated_clusters_labels_final %in% c("TOX hi Tex", 'GZMK hi Tex',
                                                                                          "LAG3 hi Tex", "TCF7+ stem-like Tex"),"Exhausted_CD8",
                                            ifelse(tcells$annotated_clusters_labels_final %in% c("MKI67 hi Tex/Tprol", "MKI67+ Tex/Tprol", 'MKI67+ Tem-NK like/Tprol'),"Proliferating_CD8",
@@ -37,7 +37,7 @@ target_colors_pastel <- c(
   "Tem_CD8" = "lightcoral"             
 )
 
-curated_pairs= fread("s0_potential_pairs.txt")
+curated_pairs= fread("Results_Nichenet/s0_potential_pairs.txt")
 qc_ligands=curated_pairs$from
 qc_receptors=curated_pairs$to
 
@@ -57,7 +57,7 @@ t_dexp[, target_type := ifelse(rowSums(.SD == 1) == 1,
                                "Unspecific"), .SDcols = !c("receptor")]
 
 ######################################## tumor ######################################## 
-all_tum=readRDS("Tumor_Annotated.Rds")
+all_tum=readRDS("Results_tumor/Tumor_Annotated.Rds")
 all_tum=subset(all_tum, annotated_clusters != "Low Gene Count Cells") 
 activity_ligands_tum=fread("./Results_Tumor_nn/backbone_ligand_activity_tum.txt") # change to current folder
 predicted_pairs_tum=fread("./Results_Tumor_nn/backbone_tum_nn_results.txt")
@@ -100,6 +100,7 @@ lr_table_30=merge(lr_table_30,dexp[,.(ligand, ligand_type)],by="ligand")
 setnames(lr_table_30, "receptor", "target")
 
 table(lr_table_30$ligand_type)
+write.csv(lr_table_30,"Results_Tumor_nn/lr_table_30_tum.csv")
 
 values_tum= c( "IR_unspecific"= "#689a79","Immune.Response"= "#99CC66",
               "intersect_hyp_IR"="limegreen",
@@ -113,10 +114,11 @@ vis_circos_receptor_obj <- prepare_circos_visualization(
   target_colors = target_colors_pastel,
   celltype_order = names(values_tum)) 
 
-source("min_thres_circos.R")
+source("Scripts/4.Nichenet/min_thres_circos.R")
 
 pdf("./Results_Tumor_nn/circos_plot_all_groups_nichenet_tum.pdf", width=7, height=7)
 min_thres_circos(vis_circos_receptor_obj, transparency = TRUE,
                  link.visible = TRUE,  args.circos.text = list(cex = 0.8))
 dev.off()
 
+write.csv(vis_circos_receptor_obj$links_circle,"Results_Tumor_nn/circos_plot_all_groups_nichenet_tum.csv")
