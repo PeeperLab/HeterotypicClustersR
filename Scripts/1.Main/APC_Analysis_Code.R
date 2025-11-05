@@ -15,12 +15,13 @@ library(harmony)
 library(RSpectra)#0.16-2
 library(DoubletFinder)#2.0.4
 library(scGate)
+
 set.seed(2000)
 fig_path="Results_APCs"
 if(!dir.exists(fig_path)) dir.create(fig_path) 
 
 # object all patients from intial script
-S_all = readRDS("Combined_All_Cells.Rds")
+S_all = readRDS("Results_Main/Combined_All_Cells.Rds")
 S_all<-SetIdent(S_all, value = S_all@meta.data$seurat_clusters)
 
 # select APC compartment
@@ -74,16 +75,16 @@ FeaturePlot(apc_subset,features = c("KIT","PTPRC", "MLANA","MCAM",
 dev.off()
 
 # # Doublets check
-annotations <- apc_subset@meta.data$seurat_clusters
-homotypic.prop <- modelHomotypic(annotations)
-nExp_poi <- round(0.075*nrow(apc_subset@meta.data))  ## Assuming 7.5% doublet formation rate 
-nExp_poi.adj <- round(nExp_poi*(1-homotypic.prop))
-apc_subset <- doubletFinder(apc_subset, PCs = 1:10, pN = 0.25, pK = 0.09, nExp = nExp_poi, reuse.pANN = FALSE, sct = FALSE)
-
-pdf(file=paste0(fig_path,"/APC_Doublets_Prefilter.pdf"), width=10, height=12)
-options(repr.plot.width=15, repr.plot.height=15)
-DimPlot(apc_subset, reduction = "umap",group.by="DF.classifications_0.25_0.09_1000",order = FALSE)
-dev.off()
+# annotations <- apc_subset@meta.data$seurat_clusters
+# homotypic.prop <- modelHomotypic(annotations)
+# nExp_poi <- round(0.075*nrow(apc_subset@meta.data))  ## Assuming 7.5% doublet formation rate 
+# nExp_poi.adj <- round(nExp_poi*(1-homotypic.prop))
+# apc_subset <- doubletFinder(apc_subset, PCs = 1:10, pN = 0.25, pK = 0.09, nExp = nExp_poi, reuse.pANN = FALSE, sct = FALSE)
+# 
+# pdf(file=paste0(fig_path,"/APC_Doublets_Prefilter.pdf"), width=10, height=12)
+# options(repr.plot.width=15, repr.plot.height=15)
+# DimPlot(apc_subset, reduction = "umap",group.by="DF.classifications_0.25_0.09_1000",order = FALSE)
+# dev.off()
 
 # # Remove the problematic clusters
 seurat_clusters_oi = unique(apc_subset@meta.data$seurat_clusters)
@@ -445,9 +446,14 @@ DimPlot(apc_data_filtered, group.by = "hi_res_clus", label=T)+scale_color_manual
 DimPlot(apc_data_filtered, group.by = "og_clus", label=T)+theme(legend.position = "none")
 
 ##### export the objects
-saveRDS(apc_data_filtered, paste0(fig_path,"./apc_data_filtered_fvf_corr.rds"))
-saveRDS(mm_filt, paste0(fig_path,"./final_mm_fvf_corr.rds"))
-saveRDS(dc_filt, paste0(fig_path,"./final_dc_fvf_corr.rds"))
-saveRDS(bcell_filt,paste0(fig_path, "./final_bcell_fvf_corr.rds"))
-saveRDS(palette_apc, paste0(fig_path,"./palette_apc_fvf_corr.rds"))
+saveRDS(apc_data_filtered, paste0(fig_path,"/apc_data_filtered_fvf_corr.rds"))
+saveRDS(mm_filt, paste0(fig_path,"/final_mm_fvf_corr.rds"))
+saveRDS(dc_filt, paste0(fig_path,"/final_dc_fvf_corr.rds"))
+saveRDS(bcell_filt,paste0(fig_path, "/final_bcell_fvf_corr.rds"))
+saveRDS(palette_apc, paste0(fig_path,"/palette_apc_fvf_corr.rds"))
+
+#apc_data_filtered_old<-readRDS("/Users/a.george/Documents/CD39_revision_code_check/all_processed_objects/apc_data_filtered_fvf_corr.rds")
+
+#table(apc_data_filtered_old$major_classes)
+#table(apc_data_filtered$major_classes)
 
