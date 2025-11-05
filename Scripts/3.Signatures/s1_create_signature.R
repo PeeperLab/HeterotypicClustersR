@@ -15,7 +15,7 @@ library(ggpubr)
 fig_path = "Results_create_signature"
 if(!dir.exists(fig_path)) dir.create(fig_path) 
 
-five_pat=readRDS("Tcells_Final.Rds")
+five_pat=readRDS("Results_Tcells/Tcells_Final.Rds")
 
 Idents(five_pat)="sample_id"
 
