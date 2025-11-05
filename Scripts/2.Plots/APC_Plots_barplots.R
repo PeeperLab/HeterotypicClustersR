@@ -15,24 +15,14 @@ fig_path = "Results_APC_plots_barplots"
 if(!dir.exists(fig_path)) dir.create(fig_path) 
 
 # loadings
-apc_all=readRDS("apc_data_filtered_fvf_corr.rds")
-palette_apc=readRDS("palette_apc_fvf_corr.rds")
+apc_all=readRDS("Results_APCs/apc_data_filtered_fvf_corr.rds")
+palette_apc=readRDS("Results_APCs/palette_apc_fvf_corr.rds")
 
 # format
 meta_apc=apc_all@meta.data
 meta_apc=setDT(data.frame(meta_apc))
 meta_apc=meta_apc[sample_id!="DB_Tumor_Tcell",]
 meta_apc$sample_id=factor(meta_apc$sample_id, levels=c("SG_Singlets","DB_APC_Tcell"))
-
-ggplot(meta_apc, aes(sample_id, fill=hi_res_clus))+
-  geom_bar(position="fill")+
-  scale_fill_manual("",values=palette_apc)+
-  facet_grid(major_classes~patient_id)+
-  theme_bw()+ylab("Frequency")+xlab("")+
-  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=.5), 
-        legend.key.height = unit(4, "mm"), legend.key.width = unit(4, "mm"),
-        legend.text = element_text(size=6))
-ggsave("Results_APC_plots_barplots/all_pats_all_freqs.pdf", height=5, width=7)
 
 ggplot(meta_apc[major_classes=="mono_mac"|
                 (major_classes=="DCs"& patient_id %in% c("P2","P3","P5"))|
@@ -45,7 +35,16 @@ ggplot(meta_apc[major_classes=="mono_mac"|
         legend.key.height = unit(4, "mm"), legend.key.width = unit(4, "mm"),
         legend.text = element_text(size=8))
 ggsave("Results_APC_plots_barplots/all_pats_all_freqs_filtered.pdf", height=5, width=8)
-
+meta_apc_filtered <- meta_apc %>%
+  filter(
+    major_classes == "mono_mac" |
+      (major_classes == "DCs" & patient_id %in% c("P2", "P3", "P5")) |
+      (major_classes == "B_plasma_cells" & patient_id %in% c("P3", "P5"))
+  ) %>%
+  group_by(major_classes, patient_id, sample_id, hi_res_clus) %>%
+  summarise(count = n(), .groups = "drop_last") %>%
+  mutate(Frequency = count / sum(count))
+write.csv(meta_apc_filtered,"Results_APC_plots_barplots/all_pats_all_freqs_filtered.csv")
 # plot without filtering
 meta_apc[, tot_sample_class:= .N, by=c("sample_id", "patient_id", "major_classes")]
 meta_apc[, tot_sample_clus:= .N, by=c("sample_id", "patient_id", "hi_res_clus")]
@@ -62,6 +61,7 @@ ggplot(meta_apc_plot1,
   theme(axis.text.x = element_text(angle=90, hjust=1, vjust=.5))
 ggsave("Results_APC_plots_barplots/filter_out_criteria.pdf", height=3, width=6)
 
+write.csv(meta_apc_plot1,"Results_APC_plots_barplots/filter_out_criteria.csv")
 
 # # some groups are missing: we have to fill them with 0s
 sample_ids <- unique(meta_apc$sample_id)
@@ -98,7 +98,7 @@ ggplot(dcbc, aes(sample_id,y=percent_clus_class, fill=hi_res_clus))+
   ylab("Average frequency")+xlab("")+
   theme(axis.text.x = element_text(angle=90, hjust=1, vjust=1))
 ggsave("Results_APC_plots_barplots/bcell_dc_avg_freq_barplot.pdf", height=5, width=4.5)
-
+write.csv(dcbc,"Results_APC_plots_barplots/bcell_dc_avg_freq_barplot.csv")
 mm=avg_pat_meta_2_FILT[grepl('mac',hi_res_clus)|grepl('mono',hi_res_clus),]
 ggplot(mm, aes(sample_id,y=percent_clus_class, fill=hi_res_clus))+
   geom_bar(stat="identity")+theme_bw()+
@@ -106,10 +106,4 @@ ggplot(mm, aes(sample_id,y=percent_clus_class, fill=hi_res_clus))+
   ylab("Average frequency")+xlab("")+
   theme(axis.text.x = element_text(angle=90, hjust=1, vjust=1))
 ggsave("Results_APC_plots_barplots/mm_avg_freq_barplot.pdf", height=5, width=4)
-
-ggplot(avg_pat_meta_2_FILT, aes(sample_id,y=percent_clus_class, fill=hi_res_clus))+
-  geom_bar(stat="identity")+theme_bw()+
-  facet_wrap(~major_classes)+
-  scale_fill_manual(values=palette_apc, name="")+
-  ylab("Average frequency")+xlab("")+
-  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=1))
+write.csv(mm,"Results_APC_plots_barplots/mm_avg_freq_barplot.csv")
