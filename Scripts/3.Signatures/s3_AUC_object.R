@@ -17,7 +17,7 @@ if(!dir.exists(fig_path)) dir.create(fig_path)
 # load the t-cell object
 set.seed(150799)
 #setwd("/YOUR/PATH/")
-five_pat=readRDS("Tcells_Final.Rds")
+five_pat=readRDS("Results_Tcells/Tcells_Final.Rds")
 meta=five_pat@meta.data
 meta$cell_id=rownames(meta)
 
@@ -26,15 +26,15 @@ exprMatrix= five_pat@assays$RNA@counts
 exprMatrix <- as(exprMatrix, "dgCMatrix")
 
 # load all signatures
-neotcr_cd8=scan("rosenberg_neoTCR_cd8.txt",what="character")
-offringa_TR_9_samples=scan("offringa_TR_9_samples.txt",what="character")
-Tirosh_Mel_Exh=scan("Tirosh_Mel_Exh.txt",what="character")
-Yost_CD8.Exh=scan("Yost_CD8.Exh",what="character")
-db_30=scan("top30_genes_DB_signature.txt",what="character")
-db_100=scan("top100_genes_DB_signature.txt",what="character")
+neotcr_cd8=scan("extdata/signatures_tcells/rosenberg_neoTCR_cd8.txt",what="character")
+offringa_TR_9_samples=scan("extdata/signatures_tcells/offringa_TR_9_samples.txt",what="character")
+Tirosh_Mel_Exh=scan("extdata/signatures_tcells/Tirosh_Mel_Exh.txt",what="character")
+Yost_CD8.Exh=scan("extdata/signatures_tcells/Yost_CD8.Exh.txt",what="character")
+db_30=scan("Results_create_signature/top30_genes_DB_signature.txt",what="character")
+db_100=scan("Results_create_signature/top100_genes_DB_signature.txt",what="character")
 
 # now for the csv files
-specificity_oliv=read.csv2("tumor_viral_specificity_oliveira.csv")
+specificity_oliv=read.csv2("extdata/signatures_tcells/tumor_viral_specificity_oliveira.csv")
 setDT(specificity_oliv)
 specificity_oliv=split(specificity_oliv, f=factor(specificity_oliv$Signature))
 specificity_oliv=lapply(specificity_oliv, function(x){
@@ -42,7 +42,7 @@ specificity_oliv=lapply(specificity_oliv, function(x){
 })
 names(specificity_oliv)=paste0("oliv_", names(specificity_oliv))
 
-all_pathways=fgsea::gmtPathways("c2.cp.v7.5.1.symbols.gmt")
+all_pathways=fgsea::gmtPathways("extdata/signatures_tcells/c2.cp.v7.5.1.symbols.gmt")
 
 geneSets=c(list("neotcr_cd8"=neotcr_cd8,
                 "offringa_TR_9_samples"=offringa_TR_9_samples,
