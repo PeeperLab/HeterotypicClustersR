@@ -20,7 +20,7 @@ set.seed(150799)
 fig_path = "Results_tumor_unbiased_analysis"
 if(!dir.exists(fig_path)) dir.create(fig_path)
 
-five_tum=readRDS("Tumor_Annotated.Rds")
+five_tum=readRDS("Results_tumor/Tumor_Annotated.Rds")
 DefaultAssay(five_tum)="RNA"
 
 # DGE at cell level
@@ -65,9 +65,9 @@ ggplot(res, aes(avg_log2FC, -log10(p_val_adj)))+
   xlim(c(-.3,.3))
 ggsave("Results_tumor_unbiased_analysis/sc_tum_volcano_big_labels.pdf", width=8, height = 8)
 
-
+write.csv(res,"Results_tumor_unbiased_analysis/sc_tum_volcano_big_labels.csv")
 # Running GSEA analysis
-gene.set=fgsea::gmtPathways("c2.cp.v7.5.1.symbols.gmt") 
+gene.set=fgsea::gmtPathways("extdata/signatures_tcells/c2.cp.v7.5.1.symbols.gmt") 
 
 setDT(res)
 res_filt=res[,stats:=ifelse(avg_log2FC>0,-log10(p_val),log10(p_val))] # weight the pval
@@ -102,60 +102,5 @@ ggplot(ff_res, aes(NES, reorder(gsub("_"," ",pathway), NES), fill=NES))+
                                 low="#7cd3f7")+
   geom_point(data=ff_res[padj<0.05], shape=8)
 ggsave("Results_tumor_unbiased_analysis/top.bottom_gsea.pdf", width=5, height=4.5)
-
-
-# # # analysis per patient to see if results are robust
-seurat_list=lapply(unique(five_tum@meta.data$patient_id), function(x){
-  subset(five_tum, patient_id == x)
-})
-
-res_list=lapply(seurat_list, function(x){
-  Idents(x)="sample_id"
-  res=FindMarkers(x, ident.1="DB_Tumor_Tcell", "SG_Singlets", 
-                  logfc.threshold = 0, min.pct = 0.1,
-                  test.use = "MAST")
-  res=data.frame(res)
-  res$gene=rownames(res)
-  res$patient_id=unique(x$patient_id)
-  return(res)
-})
-
-all_res=do.call(rbind, res_list)
-setDT(all_res)
-fwrite(all_res, "Results_tumor_unbiased_analysis/per_pat_dge_filt.txt")
-
-# # select genes for per pat validation
-# hipoxia=c( "VEGFA","ALDOA","BNIP3", 
-#           "ALDOA", "LDHA", "PKM", "PLIN2",
-#           "ENO1", "PGK1")
-# ap=c("HLA-A", "HLA-B","HLA-C","HLA-E",
-#      "HLA-F","TAP1","PSMB9","ISG15", 
-#      "GBP2")
-# 
-# ggplot(all_res[gene %in% hipoxia,],
-#        aes(x=patient_id, y=reorder(gene, p_val),
-#            col=avg_log2FC))+
-#   geom_point(size=9)+theme_bw()+
-#   scale_color_gradient2(high="#825d9e", low="#7cd3f7", mid = "lightyellow1")+
-#   ylab("")+xlab("")+
-#   geom_point(data=all_res[(gene %in% hipoxia)&p_val_adj<0.05,], col="black", shape=8, size=2)+
-#   scale_y_discrete(labels = label_wrap(width = 50))+ylab("")+
-#   theme(legend.position = "bottom", legend.text = element_text(angle=90, hjust=0.5, vjust=0.5),
-#         panel.grid.major = element_blank(), 
-#         panel.grid.minor = element_blank())
-# ggsave("Results_tumor_unbiased_analysis/markers_per_pat_HIF1.pdf", width = 3.2, height = 4.3)
-# 
-# ggplot(all_res[gene %in% ap,],
-#        aes(x=patient_id, y=reorder(gene, p_val),
-#            col=avg_log2FC))+
-#   geom_point(size=9)+theme_bw()+
-#   scale_color_gradient2(high="#825d9e", low="#7cd3f7", mid = "lightyellow1")+
-#   ylab("")+xlab("")+
-#   geom_point(data=all_res[(gene %in% ap)&p_val_adj<0.05,], col="black", shape=8, size=2)+
-#   scale_y_discrete(labels = label_wrap(width = 50))+ylab("")+
-#   theme(legend.position = "bottom", legend.text = element_text(angle=90, hjust=0.5, vjust=0.5),
-#         panel.grid.major = element_blank(), 
-#         panel.grid.minor = element_blank())
-# ggsave("Results_tumor_unbiased_analysis/markers_per_pat_IFNAB_antigen.presentation.pdf", width = 3.2, height = 4.3)
-
-
+df <- do.call(rbind,ff_res)
+write.csv(df,"Results_tumor_unbiased_analysis/top.bottom_gsea.csv")
