@@ -20,7 +20,7 @@ fig_path = "Results_Tcells"
 if(!dir.exists(fig_path)) dir.create(fig_path) 
 
 
-pbmc.combined<-readRDS("Combined_All_Cells.Rds")
+pbmc.combined<-readRDS("Results_Main/Combined_All_Cells.Rds")
 #Further analysis of Tcells by same harmony integration by filtering out genes in the "MitoCarta2_human.txt" file related to mitochondria and other like TCR and ribo
 tcell.combined<-subset(x = pbmc.combined, subset = seurat_clusters %in% c( 0,1,3,6,12,14,15 ))
 
