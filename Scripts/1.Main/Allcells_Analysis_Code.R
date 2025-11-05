@@ -9,6 +9,7 @@
 
 #R version 4.3.3
 
+
 set.seed(2000)
 #setwd("/YOUR/PATH/")
 library(Seurat)# Version 4.4.0 
@@ -519,6 +520,6 @@ pdf(paste0("Results_Main/","Allcells_CD3D_Markers_Nebulosa.pdf"),width=12,height
 plot_density(pbmc.combined, "CD3D",size=2,adjust = 20,method = "wkde",slot="counts") +ggtitle("CD3D")+theme(plot.title = element_text(hjust = 0.5),title=element_text(size=35),axis.text=element_text(size=12),axis.title=element_text(size=14))
 dev.off()
 
-#rerun object
+
 saveRDS(pbmc.combined,"Results_Main/Combined_All_Cells.Rds")
 
